@@ -58,6 +58,12 @@ class  DAO {
                     q.setParameter(entry.getKey(), entry.getValue());
                 });
                 return q.getResultList();
+            }else if(bd.DAO.Cep.class==_class){
+                Query q = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().createNamedQuery("Cep.findByCep");
+                params.entrySet().forEach((entry) -> {
+                    q.setParameter(entry.getKey(), entry.getValue());
+                });
+                return q.getResultList();
             }
             
             else{
@@ -109,12 +115,6 @@ class  DAO {
         try {
             if(bd.DAO.CidadeCodigo.class==_class){
                 Query q = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().createNamedQuery("CidadeCodigo.findByNome");
-                params.entrySet().forEach((entry) -> {
-                    q.setParameter(entry.getKey(), entry.getValue());
-                });
-                return q.getResultList();
-            }else if(bd.DAO.Cep.class==_class){
-                Query q = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().createNamedQuery("Cep.findByCep");
                 params.entrySet().forEach((entry) -> {
                     q.setParameter(entry.getKey(), entry.getValue());
                 });
