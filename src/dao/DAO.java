@@ -88,6 +88,30 @@ class  DAO {
             if(bd.DAO.AliquotaSimplesNacional.class==_class){
                 Query q = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().createNamedQuery("AliquotaSimplesNacional.findAll");
                 return q.getResultList();
+            } else if(bd.DAO.TipoPagamento.class == _class){
+                Query q = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().createNamedQuery("TipoPagamento.findAll");
+                return q.getResultList();
+            } else if(bd.DAO.GupoProduto.class == _class){
+                Query q = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().createNamedQuery("GupoProduto.findAll");
+                return q.getResultList();
+            }
+            
+            else{
+                throw new Exception("Método de pesquisa não foi implementado para classe: "+_class.toString());
+            }
+        } finally {
+            com.confiancasistemas.entity.EntityManager.getInstance().closeEntityManager();
+        }
+    }
+    
+    protected List<? extends Object> findByNameDesc(Class<?> _class, Map<String, Object> params) throws Exception {
+        try {
+            if(bd.DAO.CidadeCodigo.class==_class){
+                Query q = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().createNamedQuery("CidadeCodigo.findByNome");
+                params.entrySet().forEach((entry) -> {
+                    q.setParameter(entry.getKey(), entry.getValue());
+                });
+                return q.getResultList();
             }
             
             else{

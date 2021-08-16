@@ -14,14 +14,14 @@ import java.util.Map;
  */
 public class Controller extends DAO{
    
-    protected <T> T find(Class<T> _class, Object pk_codId) throws Exception{
+    public <T> T ControllerFind(Class<T> _class, Object pk_codId) throws Exception{
         if (com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().isOpen()) {
             return find(_class, pk_codId);
         }
         return null;
     }
     
-    protected List<? extends Object> findAll(Class<?> _class) throws Exception {
+    public List<? extends Object> ControllerFindAll(Class<?> _class) throws Exception {
         if (com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().isOpen()) {
             return findAll(_class);
         }
@@ -42,6 +42,23 @@ public class Controller extends DAO{
         return null;
     }
     
+    public List<? extends Object> ControllerFindByNameDesc(Class<?> _class, Map<String, Object> filtro) throws Exception {
+        if (com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().isOpen()) {
+            return findByNameDesc(_class, filtro);
+        }
+        return null;
+    }
+    
+    public <T> T ControllerPersistMerge(Class<T> _class, Object object)throws Exception{
+        if (com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().isOpen()) {
+            return persistMerge(_class, object);
+        }
+        return null;
+    }
+    
+    public boolean ControllerRemove(Object object)throws Exception{
+        return remove(object);
+    }
     
    
     
