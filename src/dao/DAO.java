@@ -5,6 +5,7 @@
  */
 package dao;
 
+import com.confiancasistemas.entity.EntityManager;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
@@ -19,7 +20,7 @@ class  DAO {
         try {
             o = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().find(_class, pk_codId);
         }finally{
-            com.confiancasistemas.entity.EntityManager.getInstance().closeEntityManager();
+            EntityManager.getInstance().closeEntityManager();
         }
         return (T) o;
     }
@@ -31,7 +32,7 @@ class  DAO {
             o = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().merge(object);
             com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().getTransaction().commit();
         }finally{
-            com.confiancasistemas.entity.EntityManager.getInstance().closeEntityManager();
+            EntityManager.getInstance().closeEntityManager();;
         }
         return (T) o;
     }
@@ -45,7 +46,7 @@ class  DAO {
             com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().remove(object);
             return true;
         }finally{
-            com.confiancasistemas.entity.EntityManager.getInstance().closeEntityManager();
+            EntityManager.getInstance().closeEntityManager();;
         }
     }
     
@@ -63,7 +64,7 @@ class  DAO {
                 throw new Exception("Método de pesquisa não foi implementado para classe: "+_class.toString());
             }
         } finally {
-            com.confiancasistemas.entity.EntityManager.getInstance().closeEntityManager();
+            EntityManager.getInstance().closeEntityManager();;
         }
     }
     protected List<? extends Object> findByValueMaximo(Class<?> _class, Map<String, Object> params) throws Exception {
@@ -80,7 +81,7 @@ class  DAO {
                 throw new Exception("Método de pesquisa não foi implementado para classe: "+_class.toString());
             }
         } finally {
-            com.confiancasistemas.entity.EntityManager.getInstance().closeEntityManager();
+            EntityManager.getInstance().closeEntityManager();;
         }
     }
     protected List<? extends Object> findAll(Class<?> _class) throws Exception {
@@ -100,7 +101,7 @@ class  DAO {
                 throw new Exception("Método de pesquisa não foi implementado para classe: "+_class.toString());
             }
         } finally {
-            com.confiancasistemas.entity.EntityManager.getInstance().closeEntityManager();
+            EntityManager.getInstance().closeEntityManager();;
         }
     }
     
@@ -112,13 +113,19 @@ class  DAO {
                     q.setParameter(entry.getKey(), entry.getValue());
                 });
                 return q.getResultList();
+            }else if(bd.DAO.Cep.class==_class){
+                Query q = com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().createNamedQuery("Cep.findByCep");
+                params.entrySet().forEach((entry) -> {
+                    q.setParameter(entry.getKey(), entry.getValue());
+                });
+                return q.getResultList();
             }
             
             else{
                 throw new Exception("Método de pesquisa não foi implementado para classe: "+_class.toString());
             }
         } finally {
-            com.confiancasistemas.entity.EntityManager.getInstance().closeEntityManager();
+            EntityManager.getInstance().closeEntityManager();;
         }
     }
 }
