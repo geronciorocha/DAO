@@ -14,6 +14,20 @@ import java.util.Map;
  */
 public class Controller extends DAO{
    
+    protected <T> T find(Class<T> _class, Object pk_codId) throws Exception{
+        if (com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().isOpen()) {
+            return find(_class, pk_codId);
+        }
+        return null;
+    }
+    
+    protected List<? extends Object> findAll(Class<?> _class) throws Exception {
+        if (com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().isOpen()) {
+            return findAll(_class);
+        }
+        return null;
+    }
+    
     public List<? extends Object> ControllerFindByCodId(Class<?> _class, Map<String, Object> filtro) throws Exception {
         if (com.confiancasistemas.entity.EntityManager.getInstance().currentEntityManager().isOpen()) {
             return findByCodId(_class, filtro);
@@ -27,6 +41,8 @@ public class Controller extends DAO{
         }
         return null;
     }
+    
+    
    
     
     public Controller(){
